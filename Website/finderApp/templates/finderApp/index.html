@@ -1,0 +1,14 @@
+<p>You are at ingredient page.</p>
+
+{% if ingredient_list %}
+	<ul>
+	{% for ingredient in ingrdient_list %}
+		<div>
+		<p>{{ingredient.ingredient_name}}</p>
+		<image src="{{ingredient.picture_url}}"></image>
+		</div>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No ingredients available yet.</p>
+{% endif %}
