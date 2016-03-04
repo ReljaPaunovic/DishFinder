@@ -1,10 +1,14 @@
-Make sure you have MySQLServer running in your local environment before deploying the application with WSGI:
-"mysql.server start"
-"python manage.py runserver"
+# DishFinder
 
-You can access the website locally via http://127.0.0.1:8000/
+**DishFinder** is a project made for IN4325 Information Retrieval (2015-2016 Q3) from TUDelft.
 
-Make changes to DB:
-1. change models (in models.py)
-2. Run "python manage.py makemigrations" to create migrations for those changes
-3. Run "python manage.py migrate" to apply those changes to the database
+This project is broken down into three components:
+
+### Website
+Contains the main delivery for this project which is a website powered by Django.
+
+### Web Crawler
+Contains crawler information as well as necessary text processing procedures to convert the crawled data into suitable format which will later be stored into DB. 
+
+### CrowdFlower
+Contains information of crowdsourcing using CrwodFlower platform.
