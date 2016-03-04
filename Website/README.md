@@ -1,5 +1,7 @@
 # DishFinder
 
+### Website
+
 The website uses Django framework.
 
 Make sure you have Python3 and MySQLServer running in your local environment before deploying the application with WSGI:
