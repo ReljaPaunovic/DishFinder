@@ -18,6 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
 	url(r'^finder/', include('finderApp.urls')),
-    url(r'', include('finderApp.urls')),
     url(r'^admin/', admin.site.urls),
 ]

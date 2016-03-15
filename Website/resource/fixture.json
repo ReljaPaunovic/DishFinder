@@ -1,0 +1,10 @@
+[
+	{
+		"model": "finderApp.Ingredient",
+		"pk": 1,
+		"fields": {
+			"ingredient_name": "oil",
+			"picture_url": ""
+		}
+	}
+]

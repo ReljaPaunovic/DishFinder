@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here.
 class Ingredient(models.Model):
 	ingredient_name = models.CharField(max_length=200)
-	picture_url = models.CharField(max_length=100)
+	picture_url = models.CharField(max_length=100, null=True)
 
 	def __str__(self):
 		return self.ingredient_name

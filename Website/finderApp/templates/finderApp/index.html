@@ -1,8 +1,9 @@
 <p>You are at ingredient page.</p>
+<a href="{% url 'recipe' 1%}">direct to recipe page</a>
 
 {% if ingredient_list %}
 	<ul>
-	{% for ingredient in ingrdient_list %}
+	{% for ingredient in ingredient_list %}
 		<div>
 		<p>{{ingredient.ingredient_name}}</p>
 		<image src="{{ingredient.picture_url}}"></image>
