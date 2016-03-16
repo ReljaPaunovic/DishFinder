@@ -1,5 +1,7 @@
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'finderApp/main.css' %}" />
+<script type="text/javascript" src="{% static 'bower_components/jquery/jquery.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'finderApp/main.less' %}" />
+<script type="text/javascript" src="{% static 'bower_components/less/less.min.js' %}"></script>
 
 <p>You are at ingredient page.</p>
 <a href="{% url 'recipe' 1%}">direct to recipe page</a>
