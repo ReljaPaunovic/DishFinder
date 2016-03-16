@@ -5,15 +5,6 @@
 <a href="{% url 'recipe' 1%}">direct to recipe page</a>
 
 {% if ingredient_list %}
-	<form action="{% url 'finderApp:search' question.id %}" method="post">
-	{% csrf_token %}
-	{% for choice in question.choice_set.all %}
-	    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-	    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-	{% endfor %}
-	<input type="submit" value="Vote" />
-	</form>
-	<ul>
 	{% for ingredient in ingredient_list %}
 		<div>
 		<input type="radio" name="ingredient" id="ingredient{{ forloop.counter }}" value="{{ ingredient.id }}" />
@@ -21,7 +12,6 @@
 		<image src="{{ingredient.picture_url}}"></image>
 		</div>
 	{% endfor %}
-	</ul>
 {% else %}
 	<p>No ingredients available yet.</p>
 {% endif %}

@@ -15,7 +15,14 @@ def index(request):
 	return HttpResponse(template.render(context, request))
 
 def search_result(request, search_param):
-	return HttpResponse("You're at recipe search result page.")
+	template = loader.get_template('finderApp/search_result.html')
+	ingredient_list = search_param.split("/")
+
+	result_list = []
+	context = {
+		'recipe_list': ingredient_list,
+	}
+	return HttpResponse(template.render(context, request))
 
 def recipe(request, recipe_id):
 	recipe = get_object_or_404(Recipe, pk=recipe_id)
