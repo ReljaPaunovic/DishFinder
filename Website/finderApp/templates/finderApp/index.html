@@ -2,9 +2,27 @@
 <script type="text/javascript" src="{% static 'bower_components/jquery/jquery.min.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'finderApp/main.less' %}" />
 <script type="text/javascript" src="{% static 'bower_components/less/less.min.js' %}"></script>
+<script type="text/javascript">
+	function add_ingredient() {
+		console.log($("#ingredient_finder_input").val());
+	}
+</script>
 
 <p>You are at ingredient page.</p>
 <a href="{% url 'recipe' 1%}">direct to recipe page</a>
+
+<!-- search bar to add ingredients-->
+<div id="ingredient_finder_bar">
+	<input type="text" id="ingredient_finder_input">
+	<button id="ingredient_finder_add_button" onclick="add_ingredient()">Add</button>
+</div>
+
+<!-- display added ingredients -->
+<div id="added_ingredients">
+
+</div>
+
+<!-- submit ingredient query and direct to search_result page -->
 
 {% if ingredient_list %}
 	{% for ingredient in ingredient_list %}
