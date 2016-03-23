@@ -1,10 +1,27 @@
 {% load staticfiles %}
 <script type="text/javascript" src="{% static 'bower_components/jquery/jquery.min.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'finderApp/main.less' %}" />
+<link rel="stylesheet/less" type="text/css" href="{% static 'finderApp/css/main.less' %}" />
 <script type="text/javascript" src="{% static 'bower_components/less/less.min.js' %}"></script>
+
 <script type="text/javascript">
+	var ingredient_list = [];
 	function add_ingredient() {
-		console.log($("#ingredient_finder_input").val());
+		var new_ingredient = $("#ingredient_finder_input").val();
+		if (new_ingredient != "") {
+			ingredient_list.push(new_ingredient);	
+			$("#ingredient_finder_input").val("");
+
+			// debugging
+			console.log(ingredient_list);
+
+			var new_ingredient_tag = $(document.createElement("button"));
+			var tag_text = $(document.createTextNode(new_ingredient));
+			new_ingredient_tag.append(tag_text);
+			$("#added_ingredients").append(new_ingredient_tag);
+
+		} else {
+			console.log("empty input");
+		}
 	}
 </script>
 
@@ -12,14 +29,13 @@
 <a href="{% url 'recipe' 1%}">direct to recipe page</a>
 
 <!-- search bar to add ingredients-->
-<div id="ingredient_finder_bar">
-	<input type="text" id="ingredient_finder_input">
+<div id="ingredient_finder">
+	<input type="text" name="input_ingedient" id="ingredient_finder_input">
 	<button id="ingredient_finder_add_button" onclick="add_ingredient()">Add</button>
 </div>
 
 <!-- display added ingredients -->
 <div id="added_ingredients">
-
 </div>
 
 <!-- submit ingredient query and direct to search_result page -->
