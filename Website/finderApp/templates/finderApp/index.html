@@ -23,6 +23,29 @@
 			console.log("empty input");
 		}
 	}
+
+	// pass ingredient array to search page for recipe results
+	function search_recipe() {
+		var hidden_input = $(document.createElement("input"));
+	    hidden_input.attr("type", "text");
+	    hidden_input.attr("name", "ingredient_list");
+	    hidden_input.attr("value", JSON.stringify(ingredient_list));
+
+		$("#search_recipe_form").append(hidden_input);
+		$("#search_recipe_form").submit();
+		// $.ajax({
+		// 	type: "POST",
+		// 	url: "/finder/search/",
+		// 	data: {
+		// 		ingredient_list: JSON.stringify(ingredient_list),
+		// 		csrfmiddlewaretoken: '{{ csrf_token }}'  // token for ajax cross domain security
+		// 	},
+		// 	dataType: "application/json",
+		// 	success: function(){
+		// 		console.log("success");
+		// 	}
+		// });
+	}
 </script>
 
 <p>You are at ingredient page.</p>
@@ -39,6 +62,11 @@
 </div>
 
 <!-- submit ingredient query and direct to search_result page -->
+<!-- <button id="search_recipe" onclick="search_recipe()">submit</button> -->
+
+<form id="search_recipe_form" action="/finder/search/" method="get">
+	<input type="button" onclick="search_recipe()" value="submit">
+</form>
 
 {% if ingredient_list %}
 	{% for ingredient in ingredient_list %}

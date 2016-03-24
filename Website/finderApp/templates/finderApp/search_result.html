@@ -1,5 +1,10 @@
 <p>You are at search result page.</p>
 
+<script type="text/javascript">
+	var a = {{recipe_list}};
+	console.log(a);
+</script>
+
 {% for recipe in recipe_list %}
 	<!-- display a preview info on each recipe, click to direct to recipe_detail page -->
 	<p>{{ recipe }}</p>

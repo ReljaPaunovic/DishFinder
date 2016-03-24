@@ -14,9 +14,13 @@ def index(request):
 	}
 	return HttpResponse(template.render(context, request))
 
-def search_result(request, search_param):
+def search_result(request):
 	template = loader.get_template('finderApp/search_result.html')
-	ingredient_list = search_param.split("/")
+
+	ingredient_list = []
+	if request.method == "GET":
+		ingredient_list = request.GET['ingredient_list']
+		print(ingredient_list)
 
 	result_list = []
 	context = {
