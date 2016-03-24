@@ -6,6 +6,8 @@ from django.template import loader
 from .models import Ingredient
 from .models import Recipe
 
+import json
+
 def index(request):
 	ingredient_list = Ingredient.objects.all()
 	template = loader.get_template('finderApp/index.html')
@@ -19,9 +21,10 @@ def search_result(request):
 
 	ingredient_list = []
 	if request.method == "GET":
-		ingredient_list = request.GET['ingredient_list']
-		print(ingredient_list)
-
+		ingredient_list_string = request.GET['ingredient_list']
+		# json decode
+		ingredient_list = json.loads(ingredient_list_string)
+	
 	result_list = []
 	context = {
 		'recipe_list': ingredient_list,

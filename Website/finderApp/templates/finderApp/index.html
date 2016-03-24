@@ -33,18 +33,6 @@
 
 		$("#search_recipe_form").append(hidden_input);
 		$("#search_recipe_form").submit();
-		// $.ajax({
-		// 	type: "POST",
-		// 	url: "/finder/search/",
-		// 	data: {
-		// 		ingredient_list: JSON.stringify(ingredient_list),
-		// 		csrfmiddlewaretoken: '{{ csrf_token }}'  // token for ajax cross domain security
-		// 	},
-		// 	dataType: "application/json",
-		// 	success: function(){
-		// 		console.log("success");
-		// 	}
-		// });
 	}
 </script>
 
@@ -62,12 +50,12 @@
 </div>
 
 <!-- submit ingredient query and direct to search_result page -->
-<!-- <button id="search_recipe" onclick="search_recipe()">submit</button> -->
-
 <form id="search_recipe_form" action="/finder/search/" method="get">
 	<input type="button" onclick="search_recipe()" value="submit">
 </form>
 
+
+<!-- tmp -->
 {% if ingredient_list %}
 	{% for ingredient in ingredient_list %}
 		<div>
