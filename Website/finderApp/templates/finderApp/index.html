@@ -53,17 +53,5 @@
 <form id="search_recipe_form" action="/finder/search/" method="get">
 	<input type="button" onclick="search_recipe()" value="submit">
 </form>
-
-
-<!-- tmp -->
-{% if ingredient_list %}
-	{% for ingredient in ingredient_list %}
-		<div>
-		<input type="radio" name="ingredient" id="ingredient{{ forloop.counter }}" value="{{ ingredient.id }}" />
-		<label for="choice{{ forloop.counter }}">{{ingredient.ingredient_name}}</label>
-		<image src="{{ingredient.picture_url}}"></image>
-		</div>
-	{% endfor %}
-{% else %}
 	<p>No ingredients available yet.</p>
 {% endif %}
