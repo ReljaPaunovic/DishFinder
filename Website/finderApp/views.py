@@ -24,10 +24,11 @@ def search_result(request):
 		ingredient_list_string = request.GET['ingredient_list']
 		# json decode
 		ingredient_list = json.loads(ingredient_list_string)
-	
-	result_list = []
+
+	result_list = ingredient_list
 	context = {
-		'recipe_list': ingredient_list,
+		'recipe_list': result_list,
+		'dummy_recipe_id': 1,
 	}
 	return HttpResponse(template.render(context, request))
 

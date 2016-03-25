@@ -6,5 +6,15 @@
 			"ingredient_name": "oil",
 			"picture_url": ""
 		}
+	},
+
+	{
+		"model": "finderApp.Recipe",
+		"pk": 1,
+		"fields": {
+			"recipe_name": "chicken rice",
+			"contained_ingredient": "1"
+		}
 	}
+
 ]
