@@ -1,3 +1,7 @@
+{% extends "finderApp/base.html" %}
+
+{% block content %}
+
 <p>You are at search result page.</p>
 
 {% for recipe in recipe_list %}
@@ -5,3 +9,5 @@
 	<p>{{ recipe }}</p>
 	<a href="/finder/recipe/{{ dummy_recipe_id }}">Name of Dish</a> 
 {% endfor %}
+
+{% endblock content %}

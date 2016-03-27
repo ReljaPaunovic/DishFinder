@@ -1,0 +1,67 @@
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'bower_components/jquery/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'bower_components/bootstrap/bootstrap-v3.3.6.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'finderApp/css/bootstrap.min.css' %}" />
+<link rel="stylesheet/less" type="text/css" href="{% static 'finderApp/css/main.less' %}" />
+<script type="text/javascript" src="{% static 'bower_components/less/less.min.js' %}"></script>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="/finder/">DishFinder</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/finder/">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <!--Sign In dropdown-->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+          <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+              <li>
+                <div class="row">
+                  <div class="col-md-12">
+                    <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                      <div class="form-group">
+                         <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                         <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                      </div>
+                      <div class="form-group">
+                         <label class="sr-only" for="exampleInputPassword2">Password</label>
+                         <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                      </div>
+                      <div class="checkbox">
+                         <label class="bg-5">
+                         <input type="checkbox"> Remember me
+                         </label>
+                      </div>
+                      <div class="form-group">
+                         <button type="submit" class="btn btn-block orangebutton">Sign in</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </li>
+          </ul>      
+        </li>
+        <li><a href="/finder/signup/">Sign Up</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% block content %}
+{% endblock content %}
+</body>
+
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+</footer>
