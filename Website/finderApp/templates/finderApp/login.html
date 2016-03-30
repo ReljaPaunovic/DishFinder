@@ -1,0 +1,19 @@
+{% extends "finderApp/base.html" %}
+{% block title %}Log In{% endblock %}
+{% block content %}
+
+<form method="post">
+{% csrf_token %}
+
+{% if form.errors %}
+<p>Your Username or Password were not entered correctly. Please try again.</p>
+{% endif %}
+
+<table>
+  {{ form.as_table }}
+</table>
+
+<input type="submit" value="login" />
+</form>
+
+{% endblock %}
