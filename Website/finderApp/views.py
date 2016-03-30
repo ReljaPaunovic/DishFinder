@@ -5,6 +5,8 @@ from django.template import loader
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import render_to_response
@@ -32,7 +34,7 @@ def login(request):
 		user = authenticate(username=username, password=password)
 		if user is not None:
 			if user.is_active:
-				login(request, user)
+				auth_login(request, user)
 				# Redirect to a success page.
 				print("logged in")
 			else:
