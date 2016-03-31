@@ -5,16 +5,12 @@
 <form method="post">
 {% csrf_token %}
 
-{% if form.errors %}
-<p>Your Username or Password were not entered correctly. Please try again.</p>
-{% endif %}
-
 <table>
 	<tr><td>Username:</td><td><input type="text" name="username" /></td></tr>
 	<tr><td>Password:</td><td><input type="password" name="password" /></td></tr>
 </table>
 
-<input type="submit" value="login" />
+<input type="submit" value="login" name="login"/>
 </form>
 
 {% endblock %}
