@@ -1,13 +1,23 @@
+{% extends "finderApp/base.html" %}
+
+{% block content %}
 <script type="text/javascript">
-	var ingredient_list = [];
+	var selected_ingredient_list = [];	// selected ingredients
+
+	// search for ingredient in the search bar from the list of predefined ingredients
+	function search_ingredient() {
+		var input_value = $("#ingredient_finder_input").val();
+	}
+
+	// add user inputed ingredient to selected list
 	function add_ingredient() {
 		var new_ingredient = $("#ingredient_finder_input").val();
 		if (new_ingredient != "") {
-			ingredient_list.push(new_ingredient);	
+			selected_ingredient_list.push(new_ingredient);	
 			$("#ingredient_finder_input").val("");
 
 			// debugging
-			console.log(ingredient_list);
+			console.log(selected_ingredient_list);
 
 			var new_ingredient_tag = $(document.createElement("div"));
 			new_ingredient_tag.attr("class", "ingredient_wrapper");
@@ -21,9 +31,9 @@
 			remove_button.click(function(){
 				new_ingredient_tag.remove();
 				// remove from array as well
-				var index = ingredient_list.indexOf(new_ingredient);
+				var index = selected_ingredient_list.indexOf(new_ingredient);
 				if (index > -1) {
-				    ingredient_list.splice(index, 1);
+				    selected_ingredient_list.splice(index, 1);
 				}
 			})
 
@@ -42,25 +52,55 @@
 		var hidden_input = $(document.createElement("input"));
 	    hidden_input.attr("type", "hidden");
 	    hidden_input.attr("name", "ingredient_list");
-	    hidden_input.attr("value", JSON.stringify(ingredient_list));
+	    hidden_input.attr("value", JSON.stringify(selected_ingredient_list));
 
 		$("#search_recipe_form").append(hidden_input);
 		$("#search_recipe_form").submit();
 	}
 </script>
 
-
-{% extends "finderApp/base.html" %}
-
-{% block content %}
+<script type="text/javascript">
+	$(function() {
+	    var availableTags = [
+	      "ActionScript",
+	      "AppleScript",
+	      "Asp",
+	      "BASIC",
+	      "C",
+	      "C++",
+	      "Clojure",
+	      "COBOL",
+	      "ColdFusion",
+	      "Erlang",
+	      "Fortran",
+	      "Groovy",
+	      "Haskell",
+	      "Java",
+	      "JavaScript",
+	      "Lisp",
+	      "Perl",
+	      "PHP",
+	      "Python",
+	      "Ruby",
+	      "Scala",
+	      "Scheme"
+	    ];
+	    $( "#ingredient_finder_input" ).autocomplete({
+	      source: availableTags
+	    });
+	  });
+ </script>
 
 <!-- First Container -->
 <div class="container-fluid text-center" id="mysearchbar">
   <h1 class="margin">What do you have in your fridge?</h1>
 
   	<!-- search bar to add ingredients-->
-	<div id="ingredient_finder">
-		<input type="text" name="input_ingedient" id="ingredient_finder_input">
+	<div id="ingredient_finder" class="dropdown">
+		<div class="ui-widget">
+		  <input id="ingredient_finder_input">
+		</div>
+
 		<button id="ingredient_finder_add_button" class="btn btn-danger" onclick="add_ingredient()">Add</button>
 	</div>
 
