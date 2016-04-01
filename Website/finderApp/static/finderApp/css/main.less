@@ -2,13 +2,224 @@
 	display: none;
 }
 
+#ingredient_finder_input {
+	color: #000000
+}
 #added_ingredients {
 	button {
 		margin: 5px;
 	}
 }
+#search_recipe_form {
+	margin-top: 30px;
 
-#search_recipe_button {
-	border: none;
-	background-color: #5cb85c;
+	#search_recipe_button {
+		border: none;
+		background-color: #5cb85c;
+	}
+}
+
+@themecolor: #ff8533;
+@panelcolor1: #DB042C;
+@panelcolor2: #1B6CA6;
+@panelcolor3: #60D168;
+@fontcolor: #6d6d6d;
+@footercolor: #434343;
+@instructionimage: "../image/";
+@panelbordercolor: #d2d2d2;
+body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: @fontcolor;
+    background-color: @footercolor;
+}
+
+#generalnavbar{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  font-size: 12px;
+  letter-spacing: 5px;
+  ul {
+    li {
+      a:hover{
+        color: @themecolor
+      }
+    }
+  }
+
+}
+p {
+  font-size: 16px;
+}
+.margin {
+  margin-bottom: 45px;
+}
+.container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+#mysearchbar { 
+    h1{
+      font-size: 50px;
+    }
+    background-color: @themecolor; /* Orange */
+    color: #fff;
+}
+#instructionthing { 
+    color: @fontcolor;
+    padding-top: 0px;
+    h3{
+      padding-top: 35px;
+      padding-bottom: 35px;
+      line-height: 50px;
+      font-size: 35px;
+    }
+    h2{
+      text-align: center;
+    }
+    h1 {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        text-align: center;
+        font-size: 45px;
+        span {
+          padding-top: 20px;
+          padding-bottom: 20px;
+          padding-left: 5px;
+          padding-right: 5px;
+      }
+    }
+    background-color: #fff; /* White */
+    color: @fontcolor;
+}
+
+.instructpanel{
+  border-radius:5px;
+  transition: box-shadow 0.5s;
+}
+
+#instructpanel1{  
+  .instructpanel;
+  border: 5px solid @panelcolor1; 
+  .panel-heading{
+    color: #fff !important;
+    background-color: @panelcolor1 !important;
+    padding: 25px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}
+
+#instructpanel2{  
+  .instructpanel;
+  border: 5px solid @panelcolor2; 
+  .panel-heading{
+    color: #fff !important;
+    background-color: @panelcolor2 !important;
+    padding: 25px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}
+
+#instructpanel3{  
+  .instructpanel;
+  border: 5px solid @panelcolor3; 
+  .panel-heading{
+    color: #fff !important;
+    background-color: @panelcolor3 !important;
+    padding: 25px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}
+.orangebutton {
+    color: #fff;
+    background-color: @themecolor; 
+}
+#myfooter{
+  background-color: @footercolor
+  }
+
+#listbg, #contactbg{
+  background-color: @themecolor;
+}
+#myselecttab{
+  background-color: @themecolor;
+  ul {
+    a {
+      margin-left: 10px;
+      margin-right: 10px;
+      border-radius: 20px;
+      background-color: #fff;
+      color: @fontcolor;
+    }
+
+    a:hover {
+        background-color: @themecolor * 0.6 ;
+        color: #fff;
+    }
+    .active {
+      a {
+        background-color: @themecolor *0.3;
+        color: #fff;
+
+      }
+      
+    }
+  }
+}
+
+#popularpanelgroup {
+	.panel{
+		margin-bottom: 20px;
+		border: 0px ;
+		border-radius: 0px;
+
+		.panel-heading{
+			background-color: #fff;
+			color: @fontcolor;
+			img {
+				display: block;
+    			margin: 0 auto;
+			}
+		}
+	}
+}
+
+#healthypanelgroup{
+	.panel{
+		margin-bottom: 20px;
+		border: 5plx solid green;
+		border-radiusp: 10px;
+			.panel-heading{
+			background-color: #A1D490;
+			color: @fontcolor;
+		}		
+	}
+}
+
+#recipecontainerbg{
+  background-color: #fff;
+
+}
+
+#recipebgtheme{
+  background-color: @themecolor;
+  .wrapper{
+    text-align: center;
+  }
+
 }

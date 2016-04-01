@@ -22,7 +22,7 @@
 	// pass ingredient array to search page for recipe results
 	function search_recipe() {
 		var hidden_input = $(document.createElement("input"));
-	    hidden_input.attr("type", "text");
+	    hidden_input.attr("type", "hidden");
 	    hidden_input.attr("name", "ingredient_list");
 	    hidden_input.attr("value", JSON.stringify(ingredient_list));
 
@@ -37,13 +37,13 @@
 {% block content %}
 
 <!-- First Container -->
-<div class="container-fluid bg-1 text-center">
-  	<h1 class="margin">What do you have in your fridge?</h1>
+<div class="container-fluid text-center" id="mysearchbar">
+  <h1 class="margin">What do you have in your fridge?</h1>
 
   	<!-- search bar to add ingredients-->
 	<div id="ingredient_finder">
 		<input type="text" name="input_ingedient" id="ingredient_finder_input">
-		<button id="ingredient_finder_add_button" onclick="add_ingredient()">Add</button>
+		<button id="ingredient_finder_add_button" class="btn btn-danger" onclick="add_ingredient()">Add</button>
 	</div>
 
 	<!-- display added ingredients -->
@@ -53,62 +53,49 @@
 	<!-- submit ingredient query and direct to search_result page -->
 	<form id="search_recipe_form" action="/finder/search/" method="get">
 		<div class="btn btn-success btn-lg">
-			<span class="glyphicon glyphicon-search"></span>
+			<!-- <span class="glyphicon glyphicon-search"></span> -->
 			<input id="search_recipe_button" type="button" onclick="search_recipe()" value="Search">
 		</div>
 	</form>
 </div>
 
 <!-- Second Container -->
-<div class="container-fluid bg-3">
+<div class="container-fluid" id="instructionthing">
   <!--title-->
-  <div class="text-center">
-    <h1>How does it work?</h1>
-    <br>
-  </div>
-  
-  <div class="container bg-3">
+  <h1><span>How does it work?</span></h1>
+  <div class="container">
     <!--instruction-->
     <div class="row">
 
       <div class="col-sm-4">
-        <div class="panel panel-default text-center ins1">
-          <div class="panel-heading ins1">
-            <h1 class="text-left">Step 1</h1>
+        <div class="panel panel-default text-center instrcutpanel" id="instructpanel1">
+          <div class="panel-heading">
+            <h2 class="text-left">Step 1</h2>
           </div>
           <div class="panel-body">
-            <br>
-            <h3>Fill in your</h3>
-            <h3>ingredients</h3>
-            <br>
+            <h3>Fill in your<br>ingredients</h3>      
           </div>
         </div> 
       </div> 
 
       <div class="col-sm-4">
-        <div class="panel panel-default text-center ins2">
-          <div class="panel-heading ins2">
+        <div class="panel panel-default text-center instructpanel" id="instructpanel2">
+          <div class="panel-heading">
             <h2 class="text-left">Step 2</h2>
           </div>
           <div class="panel-body">
-            <br>
-            <h3>Select</h3>
-            <h3>a tasty dish</h3>
-            <br>
+            <h3>Select<br>a tasty dish</h3>
           </div>
         </div> 
       </div> 
 
-     <div class="col-sm-4">
-        <div class="panel panel-default text-center ins3">
-          <div class="panel-heading ins3">
+      <div class="col-sm-4">
+        <div class="panel panel-default text-center instructpanel" id="instructpanel3">
+          <div class="panel-heading">
             <h2 class="text-left">Step 3</h2>
           </div>
           <div class="panel-body">
-            <br>
-            <h3>Follow recipe</h3>
-            <h3>and Enjoy!</h3>
-            <br>
+            <h3>Follow recipe<br>and Enjoy!</h3>
           </div>
         </div> 
       </div> 
