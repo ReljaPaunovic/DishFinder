@@ -18,6 +18,7 @@ from .models import Ingredient
 from .models import Recipe
 
 from finderApp.login_service import login_service
+from finderApp.rank_recipes import getSortedRecipes
 
 
 def signup(request):
@@ -63,14 +64,13 @@ def search_result(request):
 		selected_ingredient_list = json.loads(selected_ingredient_list_string)
 
 	# process selected_ingredient_list to calc result_id_list
-
-	result_id_list = []
-	result_id_list.append(1)
+	result_id_list = getSortedRecipes(selected_ingredient_list)
 
 	result_list = []
 	for i in range(len(result_id_list)):
-		obj = Recipe.objects.get(pk=result_id_list[i])
-		obj.index = result_id_list[i]
+		# print (result_id_list[i][0])
+		obj = Recipe.objects.get(pk=result_id_list[i][0])
+		obj.index = result_id_list[i][0]
 		result_list.append(obj)
 
 	context = {

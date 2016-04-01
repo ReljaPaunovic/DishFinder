@@ -9,7 +9,7 @@ start_time = time.time()
 
 stemmer = stem.PorterStemmer()
 dict = {}
-indexList = 'static/finderApp/data/index_list.csv'
+indexList = 'finderApp/static/finderApp/data/index_list.csv'
 def init(indexList):
 	#Read the index_list and store it in python dictionary (dict variable)
 	# in format (recipe_number : list_of_ingredients_in_that_recipe)
