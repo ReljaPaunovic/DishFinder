@@ -62,9 +62,6 @@
 <script type="text/javascript">
 	$(function() {
 	    var availableTags = {{ ingredient_list|safe }};
-
-	    // debugging
-	    console.log(availableTags);
 	    
 	    $( "#ingredient_finder_input" ).autocomplete({
 	      source: availableTags
