@@ -58,7 +58,7 @@ def search_result(request):
 
 	selected_ingredient_list = []
 	if request.method == "GET":
-		selected_ingredient_list_string = request.GET['selected_ingredient_list']
+		selected_ingredient_list_string = request.GET['ingredient_list']
 		# json decode
 		selected_ingredient_list = json.loads(selected_ingredient_list_string)
 
