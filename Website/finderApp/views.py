@@ -3,6 +3,7 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.template import loader
 
+from django.contrib.staticfiles.templatetags.staticfiles import static
 import json
 
 from django import forms
@@ -36,8 +37,14 @@ def logout(request):
 
 def index(request):
 	login_err = login_service(request)['err_msg']
-	ingredient_list = Ingredient.objects.all()
 	template = loader.get_template('finderApp/index.html')
+
+	# load data
+	data_url = 'finderApp/static/finderApp/json_data/ingredients_BBC.json'
+	open(data_url, "r")
+	with open(data_url) as data_file:
+		ingredient_list = json.load(data_file)
+
 	context = {
 		'is_auth':request.user.is_authenticated(),
 		'login_err': login_err,
@@ -49,13 +56,13 @@ def search_result(request):
 	login_err = login_service(request)['err_msg']
 	template = loader.get_template('finderApp/search_result.html')
 
-	ingredient_list = []
+	selected_ingredient_list = []
 	if request.method == "GET":
-		ingredient_list_string = request.GET['ingredient_list']
+		selected_ingredient_list_string = request.GET['selected_ingredient_list']
 		# json decode
-		ingredient_list = json.loads(ingredient_list_string)
+		selected_ingredient_list = json.loads(selected_ingredient_list_string)
 
-	# process ingredient_list to calc result_id_list
+	# process selected_ingredient_list to calc result_id_list
 
 	result_id_list = []
 	result_id_list.append(1)
