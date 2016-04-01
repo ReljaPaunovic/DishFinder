@@ -5,15 +5,23 @@ from django.db import models
 # Create your models here.
 class Ingredient(models.Model):
 	ingredient_name = models.CharField(max_length=200)
-	picture_url = models.CharField(max_length=100, null=True)
 
 	def __str__(self):
 		return self.ingredient_name
 
+class Direction(models.Model):
+	recipe_direction = models.TextField()
+
+	def __str__(self):
+		return self.recipe_direction
 
 class Recipe(models.Model):
-	recipe_name = models.CharField(max_length=200)
-	contained_ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+	name = models.CharField(max_length=200, default="no name")
+	image = models.URLField(max_length=200, default="")
+	servings = models.PositiveSmallIntegerField(default=2)
+	catogery = models.PositiveSmallIntegerField(default=2)
+	contained_ingredients = models.ManyToManyField(Ingredient)
+	directions = models.ManyToManyField(Direction)
 
 	def __str__(self):
 		return self.recipe_name
