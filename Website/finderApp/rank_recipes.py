@@ -1,11 +1,8 @@
-import json
 import csv
-import time
 import math
 from operator import itemgetter
 from nltk.corpus import treebank
 from nltk import stem
-start_time = time.time()
 
 stemmer = stem.PorterStemmer()
 dict = {}
@@ -16,7 +13,6 @@ def init(indexList):
 	input = open(indexList, 'r', newline='')
 	reader = csv.reader(input)
 
-	#dict = {}
 	for row in reader:
 		list = []
 		for i in range(1, len(row)):
@@ -65,9 +61,6 @@ def update(listOfIngredients):
 	#stemmer.stem(word)
 
 #Example of how to call function
-
-update(['soy','tea','salt','cheese'])
+# update(['soy','tea','salt','cheese'])
 #print(dict[501])
 #print (getSortedRecipes(['soy','tea','salt','cheese']))
-	
-print("--- %s seconds ---" % (time.time() - start_time))
