@@ -40,7 +40,7 @@ def index(request):
 	template = loader.get_template('finderApp/index.html')
 
 	# load data
-	data_url = 'finderApp/static/finderApp/json_data/ingredients_BBC.json'
+	data_url = 'finderApp/static/finderApp/data/ingredients_BBC.json'
 	open(data_url, "r")
 	with open(data_url) as data_file:
 		ingredient_list = json.load(data_file)
