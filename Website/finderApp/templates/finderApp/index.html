@@ -9,9 +9,27 @@
 			// debugging
 			console.log(ingredient_list);
 
-			var new_ingredient_tag = $(document.createElement("button"));
+			var new_ingredient_tag = $(document.createElement("div"));
+			new_ingredient_tag.attr("class", "ingredient_wrapper");
+
+			var ingredient_txt_wrapper = $(document.createElement("div"));
+			ingredient_txt_wrapper.attr("class", "ingredient_txt_wrapper");
+			var new_ingredient_txt = $(document.createElement("p"));
 			var tag_text = $(document.createTextNode(new_ingredient));
-			new_ingredient_tag.append(tag_text);
+			var remove_button = $(document.createElement("button"));
+			remove_button.attr("class", "remove_button");
+			remove_button.click(function(){
+				new_ingredient_tag.remove();
+				// remove from array as well
+				var index = ingredient_list.indexOf(new_ingredient);
+				if (index > -1) {
+				    ingredient_list.splice(index, 1);
+				}
+			})
+
+			ingredient_txt_wrapper.append(tag_text);
+			new_ingredient_tag.append(ingredient_txt_wrapper)
+							  .append(remove_button);
 			$("#added_ingredients").append(new_ingredient_tag);
 
 		} else {
