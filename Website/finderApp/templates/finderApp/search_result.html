@@ -2,12 +2,64 @@
 
 {% block content %}
 
-<p>You are at search result page.</p>
+<div class="container-fluid" id="listbg">
+  <div class="row">
+    
+    <div class="col-lg-3">
+    </div>  
+    
+    <div class="col-lg-6" id="myselecttab">
+      <ul class="nav nav-pills nav-justified">
+        <li class="active">
+          <a data-toggle="pill" href="#populartab">
+            <span class="glyphicon glyphicon-heart"></span>  Popular
+          </a>
+        </li>
+        <li>
+          <a data-toggle="pill" href="#healthytab">
+          <span class="glyphicon glyphicon-grain"></span>  Healthy
+          </a>
+        </li>
+      </ul>
+    </div>  
+  </div>
 
-{% for recipe in recipe_list %}
-	<!-- display a preview info on each recipe, click to direct to recipe_detail page -->
-	<p>{{ recipe }}</p>
-	<a href="/finder/recipe/{{ dummy_recipe_id }}">Name of Dish</a> 
-{% endfor %}
+  <div class="tab-content">
+    <!--Content of the First Tab-->
+    <div id="populartab" class="tab-pane fade in active container">
+        <br><br>
+        <div class="row" id="popularpanelgroup">
+       		<div class="col-lg-4">
+	   			<div class="panel-group">
+
+	{% for recipe in recipe_list %}
+		<!-- display a preview info on each recipe, click to direct to recipe_detail page -->
+		<div class="panel">
+			<div class="panel-heading">
+				<img src="{{ recipe.image }}" class="img-circle" alt="foodpic" width="304" height="236">
+			</div>
+
+			<div class="panel-body">
+				<a href="/finder/recipe/{{ recipe.index }}"><strong>{{ recipe.name }}</strong></a>
+			</div>
+
+			<div class="panel-footer">
+				<p>Keyword</p>
+				<span class="glyphicon glyphicon-heart"></span>
+			5
+            </span> 
+            <span class="label label-info">
+            <span class="glyphicon glyphicon-grain"></span>
+            26
+            </span> 
+			</div>
+		</div>
+	{% endfor %}
+
+	   			</div>
+   			</div>
+		</div>
+	</div>
+  </div>
 
 {% endblock content %}

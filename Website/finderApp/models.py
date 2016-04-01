@@ -24,4 +24,4 @@ class Recipe(models.Model):
 	directions = models.ManyToManyField(Direction)
 
 	def __str__(self):
-		return self.recipe_name
+		return self.name

@@ -55,12 +55,21 @@ def search_result(request):
 		# json decode
 		ingredient_list = json.loads(ingredient_list_string)
 
-	result_list = ingredient_list
+	# process ingredient_list to calc result_id_list
+
+	result_id_list = []
+	result_id_list.append(1)
+
+	result_list = []
+	for i in range(len(result_id_list)):
+		obj = Recipe.objects.get(pk=result_id_list[i])
+		obj.index = result_id_list[i]
+		result_list.append(obj)
+
 	context = {
 		'is_auth':request.user.is_authenticated(),
 		'login_err': login_err,
 		'recipe_list': result_list,
-		'dummy_recipe_id': 1,
 	}
 	return HttpResponse(template.render(context, request))
 
