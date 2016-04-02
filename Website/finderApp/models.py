@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Ingredient(models.Model):
@@ -22,6 +23,7 @@ class Recipe(models.Model):
 	catogery = models.PositiveSmallIntegerField(default=2)
 	contained_ingredients = models.ManyToManyField(Ingredient)
 	directions = models.ManyToManyField(Direction)
+	creater = models.ForeignKey(User, null=True, blank=True, default=None)
 
 	def __str__(self):
 		return self.name
