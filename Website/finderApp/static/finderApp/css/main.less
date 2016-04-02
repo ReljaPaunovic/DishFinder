@@ -1,3 +1,7 @@
+p {
+  font-size: 16px;
+}
+
 .hidden {
 	display: none;
 }
@@ -59,6 +63,7 @@
 @footercolor: #434343;
 @instructionimage: "../image/";
 @panelbordercolor: #d2d2d2;
+@ingredientbuttoncolor: #008080;
 body {
     font: 20px Montserrat, sans-serif;
     line-height: 1.8;
@@ -81,11 +86,8 @@ body {
       }
     }
   }
+}
 
-}
-p {
-  font-size: 16px;
-}
 .margin {
   margin-bottom: 45px;
 }
@@ -185,7 +187,7 @@ p {
   background-color: @footercolor
   }
 
-#listbg, #contactbg{
+#listbg, #contactbg, #signupbgtheme{
   background-color: @themecolor;
 }
 #myselecttab{
@@ -215,49 +217,158 @@ p {
 }
 
 #popularpanelgroup {
-	.panel{
-		margin-bottom: 20px;
-		border: 0px ;
-		border-radius: 0px;
+  .panel{
+    margin-bottom: 20px;
+    border: 0px ;
+    border-radius: 0px;
 
-		.panel-heading{
-			background-color: #fff;
-			color: @fontcolor;
-			img {
-				display: block;
-    			margin: 0 auto;
-			}
-		}
-	}
+    .panel-heading{
+      background-color: #fff;
+      color: @fontcolor;
+      img {
+        display: block;
+          margin: 0 auto;
+      }
+
+      
+    }
+  }
 }
-
 #healthypanelgroup{
-	.panel{
-		margin-bottom: 20px;
-		border: 5plx solid green;
-		border-radiusp: 10px;
-			.panel-heading{
-			background-color: #A1D490;
-			color: @fontcolor;
-		}		
-	}
+  .panel{
+    margin-bottom: 20px;
+    border: 5px solid green;
+    border-radiusp: 10px;
+      .panel-heading{
+      background-color: #A1D490;
+      color: @fontcolor;
+    }   
+  }
 }
-
 #recipecontainerbg{
-  background-color: #fff;
+  padding: 10px 0px 20px 0px;
+  background-color: @themecolor;
 
 }
-
 #recipebgtheme{
   background-color: @themecolor;
   .wrapper{
     text-align: center;
   }
 
-  .panel-body {
-  	p {
-	    display: inline-block;
-	    min-width: 250px;
-  	}
+}
+
+#signupcontainerbg,#addrecipecontainerbg{
+  border-radius: 10px;
+  background-color: #fff;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-right: 100px;
+  padding-left: 100px;
+  .wrapper{
+    text-align: center;
+  }
+  #signup_form {
+    .errorlist {
+      padding-left: 0;
+      font-size: 14px;
+      color: red;
+    }
+    p label {
+      display: block;
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #6d6d6d;
+    }
+    input {
+      display: block;
+      width: 100%;
+      height: 34px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+      -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+    #signup_button {
+      width: 150px;
+      margin: auto;
+    }
+  }
+}
+
+#mealsuggestion{
+  background-color: #fff;
+  border-radius: 5px;
+  color: @fontcolor;
+  .active{
+    a{
+      color: @fontcolor;
+    }
+  }
+
+  a{
+    color: @themecolor;
+  }
+}
+  
+
+#addrecipebg{
+  background-color: @themecolor;
+  h1{
+    padding-bottom: 30px;
+    text-align: center;
+    color: #fff;
+  }
+}
+
+.ingrebtn{
+  button{
+    padding: 3px 3px 3px 3px;
+    font-size: 12px;
+    background-color: @ingredientbuttoncolor;
+    color: #fff;
+  }
+}
+
+#dishcat{
+  p{
+    label{
+      margin-right: 30px; 
+    }
+    font-size: 14px
+  }
+}
+
+#recipeingredients{
+  p{
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+    border: 2px solid @themecolor;
+  }
+}
+
+#appdish, #mydessert, #mysalad, #mysoup, #mdish, #sdish{
+  text-align: center;
+  padding-top:30px;
+  padding-left: 20px;
+  .mybox{
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
+    text-align: left;
+    display: inline-block;
+    overflow: hidden;
+    
   }
 }

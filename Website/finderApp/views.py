@@ -5,8 +5,7 @@ from django.template import loader
 
 import json
 
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from finderApp.form import UserCreationForm
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
