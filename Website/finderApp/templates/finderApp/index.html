@@ -20,14 +20,21 @@
 			console.log(selected_ingredient_list);
 
 			var new_ingredient_tag = $(document.createElement("div"));
-			new_ingredient_tag.attr("class", "ingredient_wrapper");
+			new_ingredient_tag.attr("class", "btn-group ingrebtn");
+			new_ingredient_tag.attr("id", "ingredient_wrapper");
 
-			var ingredient_txt_wrapper = $(document.createElement("div"));
-			ingredient_txt_wrapper.attr("class", "ingredient_txt_wrapper");
-			var new_ingredient_txt = $(document.createElement("p"));
-			var tag_text = $(document.createTextNode(new_ingredient));
+			var ingredient_button = $(document.createElement("button"));
+			ingredient_button.attr("type", "button");
+			ingredient_button.attr("class", "btn");
+
 			var remove_button = $(document.createElement("button"));
-			remove_button.attr("class", "remove_button");
+			remove_button.attr("type", "button");
+			remove_button.attr("class", "btn remove_button");
+
+			var remove_span = $(document.createElement("span"));
+			remove_span.attr("class", "glyphicon glyphicon-remove");
+			remove_button.append(remove_span);
+
 			remove_button.click(function(){
 				new_ingredient_tag.remove();
 				// remove from array as well
@@ -37,8 +44,10 @@
 				}
 			})
 
-			ingredient_txt_wrapper.append(tag_text);
-			new_ingredient_tag.append(ingredient_txt_wrapper)
+			var tag_text = $(document.createTextNode(new_ingredient));
+
+			ingredient_button.append(tag_text);
+			new_ingredient_tag.append(ingredient_button)
 							  .append(remove_button);
 			$("#added_ingredients").append(new_ingredient_tag);
 
