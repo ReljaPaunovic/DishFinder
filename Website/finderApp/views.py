@@ -41,7 +41,7 @@ def index(request):
 	template = loader.get_template('finderApp/index.html')
 
 	# load data
-	data_url = 'finderApp/static/finderApp/data/ingredients_BBC.json'
+	data_url = 'finderApp/static/finderApp/data/ingredients_from_allrecipes.json'
 	open(data_url, "r")
 	with open(data_url) as data_file:
 		ingredient_list = json.load(data_file)
@@ -100,3 +100,10 @@ def recipe(request, recipe_id):
 		'login_err': login_err,
 		'recipe': recipe,
 	})
+
+def add_recipe(request):
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
+	else:
+		form = UserCreationForm()
+	return render(request, 'finderApp/add_recipe.html', {'form': form})

@@ -7,4 +7,5 @@ urlpatterns = [
 	url(r'^search/$', views.search_result, name='search result'),
 	url(r'^signup/$', views.signup, name='signup'),
 	url(r'^logout/$', views.logout, name='logout'),
+	url(r'^add_recipe/$', views.add_recipe, name='add recipe'),
 ]
