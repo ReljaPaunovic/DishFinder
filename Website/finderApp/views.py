@@ -12,6 +12,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
 from .models import Ingredient
+from .models import Direction
 from .models import Recipe
 
 from finderApp.login_service import login_service
@@ -109,9 +110,6 @@ def add_recipe(request):
 					 {"name":"Salad", "id":5}]
 
 	if request.method == 'POST':
-		print (request.POST['dish_name'])
-		print (request.POST['category'])
-		print (request.POST['serve_num'])
 		
 	return render(request, 'finderApp/add_recipe.html', {
 		'is_auth':request.user.is_authenticated(),

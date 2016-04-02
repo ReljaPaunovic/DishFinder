@@ -20,7 +20,7 @@ class Recipe(models.Model):
 	name = models.CharField(max_length=200, default="no name")
 	image = models.URLField(max_length=200, default="")
 	servings = models.PositiveSmallIntegerField(default=2)
-	catogery = models.PositiveSmallIntegerField(default=2)
+	category = models.PositiveSmallIntegerField(default=2)
 	contained_ingredients = models.ManyToManyField(Ingredient)
 	directions = models.ManyToManyField(Direction)
 	creater = models.ForeignKey(User, null=True, blank=True, default=None)
