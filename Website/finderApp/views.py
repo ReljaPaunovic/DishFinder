@@ -110,6 +110,23 @@ def add_recipe(request):
 					 {"name":"Salad", "id":5}]
 
 	if request.method == 'POST':
+		# request.POST['dish_name']
+		# print(request.POST['category'])
+		# request.POST['serve_num']
+		image_url = ""
+		current_user = request.user
+		input_ingredients = request.POST['ingredientlist']
+		ingredient_list = input_ingredients.split('\\n')
+		input_directions = request.POST['direction']
+		direction_list = input_directions.split('\\n')
+
+		# for i in range(len(ingredient_list))
+		ingredient = Ingredient.objects.create(ingredient_name="caonima")
+		direction = Direction.objects.create(recipe_direction="heiheihei")
+		recipe = Recipe.objects.create(name="jiadakong", image=image_url, category=request.POST['category'], servings=request.POST['serve_num'], creater=current_user)
+		recipe.contained_ingredients.add(ingredient)
+		recipe.directions.add(direction)
+		recipe.save()
 		
 	return render(request, 'finderApp/add_recipe.html', {
 		'is_auth':request.user.is_authenticated(),
