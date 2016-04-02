@@ -17,6 +17,7 @@ from .models import Recipe
 
 from finderApp.login_service import login_service
 from finderApp.rank_recipes import getSortedRecipes
+from finderApp.rank_recipes import updateIndexList
 from finderApp.form import UserCreationForm
 
 
@@ -110,23 +111,37 @@ def add_recipe(request):
 					 {"name":"Salad", "id":5}]
 
 	if request.method == 'POST':
-		# request.POST['dish_name']
-		# print(request.POST['category'])
-		# request.POST['serve_num']
+		recipe_name = request.POST['dish_name']
+		category = request.POST['category']
+		serving_num = request.POST['serve_num']
 		image_url = ""
 		current_user = request.user
-		input_ingredients = request.POST['ingredientlist']
-		ingredient_list = input_ingredients.split('\\n')
-		input_directions = request.POST['direction']
-		direction_list = input_directions.split('\\n')
 
-		# for i in range(len(ingredient_list))
-		ingredient = Ingredient.objects.create(ingredient_name="caonima")
-		direction = Direction.objects.create(recipe_direction="heiheihei")
-		recipe = Recipe.objects.create(name="jiadakong", image=image_url, category=request.POST['category'], servings=request.POST['serve_num'], creater=current_user)
+		input_ingredients = request.POST['ingredientlist']
+		input_ingredient_list = input_ingredients.split('\\n')
+		input_directions = request.POST['direction']
+		input_direction_list = input_directions.split('\\n')
+
+		# create list of ingredient objects
+		ingredient_list = []
+		for i in range(len(input_ingredient_list)):
+			ingredient = Ingredient.objects.create(ingredient_name=input_ingredient_list[i])
+			ingredient_list.append(ingredient.pk)
+
+		# create list of direction objects
+		direction_list = []
+		for i in range(len(input_direction_list)):
+			direction = Direction.objects.create(ingredient_name=input_direction_list[i])
+			direction_list.append(ingredient.pk)
+
+		# add new recipe into DB
+		recipe = Recipe(name=recipe_name, image=image_url, category=category, servings=serving_num, creater=current_user)
 		recipe.contained_ingredients.add(ingredient)
 		recipe.directions.add(direction)
 		recipe.save()
+
+		# update inverted index list for searching
+		updateIndexList(input_ingredients)
 		
 	return render(request, 'finderApp/add_recipe.html', {
 		'is_auth':request.user.is_authenticated(),

@@ -46,7 +46,7 @@ def getSortedRecipes(listOfIngredients):
 			result[key] = round(result[key], 2)
 	return (sorted(result.items(), key=itemgetter(1), reverse=True))
 	
-def update(listOfIngredients):
+def updateIndexList(listOfIngredients):
 	init(indexList)
 	lengthOfDict = len(dict.items())
 	list = []
