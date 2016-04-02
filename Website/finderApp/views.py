@@ -1,23 +1,22 @@
-from django.shortcuts import get_object_or_404, render
 from django.http import Http404
 from django.http import HttpResponse
-from django.template import loader
-
-import json
-
-from finderApp.form import UserCreationForm
-from django.contrib import auth
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-# from django.core.context_processors import csrf
+from django.template import loader
+from django.template import RequestContext
+
+from django.contrib import auth
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import json
 
 from .models import Ingredient
 from .models import Recipe
 
 from finderApp.login_service import login_service
 from finderApp.rank_recipes import getSortedRecipes
+from finderApp.form import UserCreationForm
 
 
 def signup(request):
@@ -101,8 +100,21 @@ def recipe(request, recipe_id):
 	})
 
 def add_recipe(request):
+	login_err = login_service(request)['err_msg']
+	category_list = [{"name":"Appetizer", "id":0}, 
+					 {"name":"Soup", "id":1}, 
+					 {"name":"Main Dish", "id":2}, 
+					 {"name":"Side Dish", "id":3}, 
+					 {"name":"Dessert", "id":4}, 
+					 {"name":"Salad", "id":5}]
+
 	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
-	else:
-		form = UserCreationForm()
-	return render(request, 'finderApp/add_recipe.html', {'form': form})
+		print (request.POST['dish_name'])
+		print (request.POST['category'])
+		print (request.POST['serve_num'])
+		
+	return render(request, 'finderApp/add_recipe.html', {
+		'is_auth':request.user.is_authenticated(),
+		'login_err': login_err,
+		'category_list': category_list,
+	})

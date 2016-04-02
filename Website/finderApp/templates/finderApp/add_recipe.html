@@ -1,0 +1,62 @@
+{% extends "finderApp/base.html" %}
+{% block content %}
+
+<!--registration form-->
+<div class="container-fluid" id="addrecipebg">
+  <h1>Add Recipe</h1>
+  <div class="container" id="addrecipecontainerbg">
+    <form id="add_recipe_form" method="post">
+    {% csrf_token %}
+      <div class="form-group">
+        <label for="dname">Name of Dish:</label>
+        <input type="text" class="form-control" id="dname" name="dish_name" placeholder="Yummy blue cheese salad">
+      </div>
+      <div class="form-group" id="dishcat">
+        <label for="dishtype">Dish Type:</label>
+        <p>
+        {% for category in category_list %}
+        <label class="radio-inline">
+        	{% if category.id == 2 %}
+	        	<input type="radio" name="category" checked="checked" value="{{ category.name }}">{{ category.name }}
+        	{% else %}
+	        	<input type="radio" name="category" value="{{ category.name }}">{{ category.name }}
+        	{% endif %}
+        </label>
+        {% endfor %}
+        </p>      
+      </div>
+      <div class="form-group">
+      <label for="serve_num">Number of Serving:</label>
+      <select class="form-control" id="serve_num" name="serve_num">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10+</option>
+      </select>
+      </div>
+      <div class="form-group">
+        <label for="ingredientlist">Ingredient:</label>
+        <textarea class="form-control" name="ingredientlist" placeholder="-blue cheese 300 gram" rows="5"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="direction">Direction:</label>
+        <textarea class="form-control" name="direction" placeholder="Your cooking directions" rows="7"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="uploadimg">Image:</label>
+        <button type="submit" class="btn orangebutton">Upload</button>
+      </div>
+      <div class="wrapper">
+      	<input type="submit" class="btn orangebutton" value="Submit">
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}
