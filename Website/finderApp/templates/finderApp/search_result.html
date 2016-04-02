@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load template_tags %}
+
 <div class="container-fluid" id="listbg">
   <div class="row">
     
@@ -32,7 +34,7 @@
        		<div class="col-lg-4">
 	   			<div class="panel-group">
 
-	{% for recipe in recipe_list %}
+	{% for recipe in recipes %}
 		<!-- display a preview info on each recipe, click to direct to recipe_detail page -->
 		<div class="panel">
 			<div class="panel-heading">
@@ -55,6 +57,22 @@
 			</div>
 		</div>
 	{% endfor %}
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if recipes.has_previous %}
+            <a href="?{% url_replace request 'page' recipes.previous_page_number %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}.
+        </span>
+
+        {% if recipes.has_next %}
+            <a href="?{% url_replace request 'page' recipes.next_page_number %}">next</a>
+        {% endif %}
+    </span>
+  </div>
 
 	   			</div>
    			</div>
