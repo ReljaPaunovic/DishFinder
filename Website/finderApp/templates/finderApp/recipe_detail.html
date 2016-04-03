@@ -14,9 +14,20 @@
       <div class="panel-body" id="recipeingredients">
         <img src="{{ recipe.image }}" class="img-rounded" alt="foodpic" width="304" height="236">
         <div class="recipe_detail_wrapper">
-          <div class="recipe_detail">Servings : {{ recipe.servings }} person</div>
-          <div class="recipe_detail">Category : {{ recipe.category.name }}</div>
-          <div class="recipe_detail">Rating : {{ recipe.avg_rating }}</div>
+          <button class="btn orangebutton recipe_detail"> {{ recipe.servings }} person</button>
+          <button class="btn orangebutton recipe_detail"> {{ recipe.category.name }}</button>
+          <button class="btn orangebutton recipe_detail">Rating : {{ recipe.avg_rating }}</button>
+          <form method="post" class="rating_btn">
+            {% csrf_token %}
+            <label>
+              <input type="radio" name="rating" value="1"> 1
+              <input type="radio" name="rating" value="2"> 2
+              <input type="radio" name="rating" value="3"> 3
+              <input type="radio" name="rating" value="4"> 4
+              <input type="radio" name="rating" value="5"> 5
+            </label>
+            <input type="submit" class="btn orangebutton" value="Rate">
+          </form>
         </div>
         <h2>Ingredients:</h3>
         {% for ingredient in recipe.contained_ingredients.all %}

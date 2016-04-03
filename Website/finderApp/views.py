@@ -107,6 +107,13 @@ def recipe(request, recipe_id):
 	login_err = login_service(request)['err_msg']
 	current_recipe = get_object_or_404(Recipe, pk=recipe_id)
 
+	if request.method == 'POST':
+		user_rating = request.POST['rating']
+		current_user = request.user
+		if request.user.is_authenticated():
+			print()
+
+
 	# retrieve list of recipe id which goes well with current recipe
 	category_list = Category.objects.all()
 	recipe_in_meal_list = []

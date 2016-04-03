@@ -45,9 +45,15 @@ def init(indexList):
 def getSortedRecipes(listOfIngredients):
 	init(indexList)
 	result = {}
+	inputListOfIngredients = []
+	for ingredient in listOfIngredients:
+		tokens = nltk.word_tokenize(ingredient)
+		for i in range(0, len(tokens)):
+			tokens[i] = stemmer.stem(tokens[i])
+			inputListOfIngredients.append(tokens[i])
 	for (key, recipeListOfIngredients) in dict.items():
 		for ingredient in recipeListOfIngredients:
-			if ingredient in listOfIngredients:
+			if ingredient in inputListOfIngredients:
 				if key in result.keys():
 					result[key] += 1
 				else:
@@ -56,7 +62,6 @@ def getSortedRecipes(listOfIngredients):
 			result[key] /= len(recipeListOfIngredients)
 			result[key] = round(result[key], 2)
 	return (sorted(result.items(), key=itemgetter(1), reverse=True))
-
 
 measure_words = ['cup','cups','teaspoon','tablespoon','ground','kitchen','ounce','cut','pinch',
 				'gram','pound','jar','stock','bunch','inch','piece','medium','sub','au','jus',
