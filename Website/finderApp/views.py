@@ -16,6 +16,7 @@ from .models import Category
 from .models import Ingredient
 from .models import Direction
 from .models import Recipe
+from .models import Rating
 from .models import Meal
 
 from finderApp.login_service import login_service
@@ -114,24 +115,26 @@ def recipe(request, recipe_id):
 	rate_error = ""
 
 	if request.method == 'POST':
-		user_rating = request.POST['rating']
-		current_user = request.user
-		if request.user.is_authenticated():
-			user_rating = Rating.objects.all().filter(user__pk=current_user.id, recipe__pk=recipe_id)
-			if user_rating:
-				rate_error = "You already rated this recipe."
+		if "rate_button" in request.POST:
+			user_rating = request.POST['rating']
+			current_user = request.user
+			if request.user.is_authenticated():
+				existing_user_rating = Rating.objects.all().filter(user__pk=current_user.id, recipe__pk=recipe_id)
+				if existing_user_rating:
+					rate_error = "You have already rated this recipe."
+				else:
+					rating = Rating.objects.create(score=user_rating, recipe=current_recipe, user=current_user)
+					# update recipe rating
+					rating_list = Rating.objects.all().filter(recipe__pk=recipe_id)
+					sum_score = 0
+					for individual_rating in rating_list:
+						sum_score += individual_rating.score
+					updated_score = sum_score / len(rating_list)
+					Recipe.objects.filter(pk=recipe_id).update(avg_rating=updated_score)
+					current_recipe = get_object_or_404(Recipe, pk=recipe_id)
 			else:
-				rating = Rating.objects.create(score=user_rating, recipe=current_recipe, user=current_user)
-				# update recipe rating
-				rating_list = Rating.objects.all().filter(recipe__pk=recipe_id)
-				sum_score = 0
-				for individual_rating in rating_list:
-					sum_score += individual_rating.score
-				updated_score = sum_score / len(rating_list)
-				Recipe.objects.get(pk=recipe_id).update(score=updated_score)
-		else:
-			rate_error = "You need to log in first."
-			print(rate_error)
+				rate_error = "You need to log in first."
+				print(rate_error)
 
 
 	# retrieve list of recipe id which goes well with current recipe
