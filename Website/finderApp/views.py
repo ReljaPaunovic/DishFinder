@@ -14,6 +14,7 @@ import json
 from .models import Ingredient
 from .models import Direction
 from .models import Recipe
+from .models import Meal
 
 from finderApp.login_service import login_service
 from finderApp.rank_recipes import getSortedRecipes
@@ -94,11 +95,40 @@ def search_result(request):
 
 def recipe(request, recipe_id):
 	login_err = login_service(request)['err_msg']
-	recipe = get_object_or_404(Recipe, pk=recipe_id)
+	category_list = [{"name":"Appetizer", "id":0}, 
+					 {"name":"Soup", "id":1}, 
+					 {"name":"Main Dish", "id":2}, 
+					 {"name":"Side Dish", "id":3}, 
+					 {"name":"Dessert", "id":4}, 
+					 {"name":"Salad", "id":5}]
+
+	current_recipe = get_object_or_404(Recipe, pk=recipe_id)
+	# retrieve list of recipe id which goes well with current recipe
+	recipe_in_meal_list = []
+	meal_set = Meal.objects.all().filter(suggestion__pk=recipe_id)
+	for meal in meal_set:
+		for recipe in meal.suggestion.all():
+			if int(recipe.pk) != int(recipe_id):
+				recipe_in_meal_list.append(recipe)
+
+	display_meal = True
+	if not recipe_in_meal_list:
+		display_meal = False
+
+	meal_suggestion = []
+	# initialize
+	for i in range(len(category_list)):
+		meal_suggestion.append({"cat_name":category_list[i]["name"], "recipes":[]})
+	if display_meal:
+		for recipe in recipe_in_meal_list:
+			meal_suggestion[recipe.category]["recipes"].append(recipe)
+
 	return render(request, 'finderApp/recipe_detail.html', {
 		'is_auth':request.user.is_authenticated(),
 		'login_err': login_err,
-		'recipe': recipe,
+		'recipe': current_recipe,
+		'display_meal': display_meal,
+		'meal_suggestion': meal_suggestion,
 	})
 
 def add_recipe(request):
@@ -136,8 +166,10 @@ def add_recipe(request):
 
 		# add new recipe into DB
 		recipe = Recipe(name=recipe_name, image=image_url, category=category, servings=serving_num, creater=current_user)
-		recipe.contained_ingredients.add(ingredient)
-		recipe.directions.add(direction)
+		for ingredient in ingredient_list:
+			recipe.contained_ingredients.add(ingredient)
+		for direction in direction_list:
+			recipe.directions.add(direction)
 		recipe.save()
 
 		# update inverted index list for searching

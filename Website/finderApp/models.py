@@ -31,6 +31,3 @@ class Recipe(models.Model):
 # Meal model
 class Meal(models.Model):
 	suggestion = models.ManyToManyField(Recipe)
-
-	def __str__(self):
-		return self.recipe_direction

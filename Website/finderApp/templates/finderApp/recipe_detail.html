@@ -37,29 +37,30 @@
     </div> 
   </div>
 
+{% if display_meal %}
   <div class="container" id="mealsuggestion">
     <div class="col-md-12">
-    <h2>Full meal suggestion:</h2>
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#appdish">Appertizer</a></li>
-      <li><a data-toggle="tab" href="#mysoup">Soup</a></li>
-      <li><a data-toggle="tab" href="#mysalad">Salad</a></li>
-      <li><a data-toggle="tab" href="#sdish">Side Dish</a></li>
-      <li><a data-toggle="tab" href="#mdish">Main Dish</a></li>
-      <li><a data-toggle="tab" href="#mydessert">Dessert</a></li>
-    </ul>
+      <h2>Full meal suggestion:</h2>
+      <ul class="nav nav-tabs">
+        {% for meal in meal_suggestion %}
+          <li><a data-toggle="tab" href="#{{ meal.cat_name }}">{{ meal.cat_name }}</a></li>
+        {% endfor %}
+      </ul>
 
-    <div class="tab-content">
-      <div id="appdish" class="tab-pane fade in active">
-        <div class="mybox">
-          <img src="image/slow_roast_shoulder_lamb_92930_16x9.jpg" class="img-rounded" alt="foodpic" width="200" height="150">
-          <p>Name Of Dish</p>
-        </div>
+      <div class="tab-content">
+        {% for meal in meal_suggestion %}
+          <div id="{{ meal.cat_name }}" class="tab-pane fade in active suggest_meal_wrapper">
+            {% for suggested_recipe in meal.recipes %}
+            <div class="mybox">
+              <img src="{{ suggested_recipe.image }}" class="img-rounded" alt="foodpic" width="200" height="150">
+              <p>{{ suggested_recipe.name }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
       </div>
-    </div>
-
-  </div>  
-  
-</div>
+    </div>  
+  </div>
+{% endif %}
 
 {% endblock content %}
