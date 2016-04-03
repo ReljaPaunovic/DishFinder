@@ -60,7 +60,9 @@ def index(request):
 	with open(data_url) as data_file:
 		tmp_list = json.load(data_file)
 
-	ingredient_list += tmp_list
+	for data in tmp_list:
+		if data not in ingredient_list:
+			ingredient_list.append(data)
 
 	context = {
 		'is_auth':request.user.is_authenticated(),
@@ -135,7 +137,6 @@ def recipe(request, recipe_id):
 			else:
 				rate_error = "You need to log in first."
 				print(rate_error)
-
 
 	# retrieve list of recipe id which goes well with current recipe
 	category_list = Category.objects.all()
