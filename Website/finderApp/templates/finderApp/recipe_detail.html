@@ -13,6 +13,11 @@
       </div>
       <div class="panel-body" id="recipeingredients">
         <img src="{{ recipe.image }}" class="img-rounded" alt="foodpic" width="304" height="236">
+        <div class="recipe_detail_wrapper">
+          <div class="recipe_detail">Servings : {{ recipe.servings }} person</div>
+          <div class="recipe_detail">Category : {{ recipe.category.name }}</div>
+          <div class="recipe_detail">Rating : {{ recipe.avg_rating }}</div>
+        </div>
         <h2>Ingredients:</h3>
         {% for ingredient in recipe.contained_ingredients.all %}
           <p>{{ ingredient }}</p>
