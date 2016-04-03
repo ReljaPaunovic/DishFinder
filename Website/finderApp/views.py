@@ -141,7 +141,7 @@ def add_recipe(request):
 		serving_num = request.POST['serve_num']
 		image_url = ""
 		current_user = request.user
-		
+
 		input_ingredients = request.POST['ingredientlist']
 		input_ingredient_list = input_ingredients.split('\\n')
 		input_directions = request.POST['direction']
@@ -156,11 +156,17 @@ def add_recipe(request):
 		# create list of direction objects
 		direction_list = []
 		for i in range(len(input_direction_list)):
-			direction = Direction.objects.create(ingredient_name=input_direction_list[i])
-			direction_list.append(ingredient.pk)
+			direction = Direction.objects.create(recipe_direction=input_direction_list[i])
+			direction_list.append(direction.pk)
 
 		# add new recipe into DB
-		recipe = Recipe(name=recipe_name, image=image_url, category=category, servings=serving_num, creater=current_user)
+		recipe = Recipe()
+		recipe.name = recipe_name
+		recipe.image = image_url 
+		recipe.servings = serving_num 
+		recipe.category = category 
+		recipe.creater = current_user
+		recipe.save()
 		for ingredient in ingredient_list:
 			recipe.contained_ingredients.add(ingredient)
 		for direction in direction_list:
