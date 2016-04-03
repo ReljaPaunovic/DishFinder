@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from finderApp.fields import IntegerRangeField
 
 # Create your models here.
 
@@ -28,6 +29,7 @@ class Direction(models.Model):
 class Recipe(models.Model):
 	name = models.CharField(max_length=200, default="no name")
 	image = models.URLField(max_length=200, default="")
+	avg_rating = models.DecimalField(max_digits=2, decimal_places=1, default=3)
 	servings = models.PositiveSmallIntegerField(default=2)
 	contained_ingredients = models.ManyToManyField(Ingredient)
 	directions = models.ManyToManyField(Direction)
@@ -36,6 +38,12 @@ class Recipe(models.Model):
 
 	def __str__(self):
 		return self.name
+
+# Rating model
+class Rating(models.Model):
+	score = IntegerRangeField(min_value=0, max_value=5)
+	recipe = models.ForeignKey(Recipe)
+	user = models.ForeignKey(User)
 
 # Meal model
 class Meal(models.Model):

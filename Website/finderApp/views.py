@@ -42,11 +42,19 @@ def index(request):
 	login_err = login_service(request)['err_msg']
 	template = loader.get_template('finderApp/index.html')
 
+	ingredient_list = []
 	# load data
 	data_url = 'finderApp/static/finderApp/data/ingredients_from_allrecipes.json'
 	open(data_url, "r")
 	with open(data_url) as data_file:
 		ingredient_list = json.load(data_file)
+
+	data_url = 'finderApp/static/finderApp/data/ingredients_BBC.json'
+	open(data_url, "r")
+	with open(data_url) as data_file:
+		tmp_list = json.load(data_file)
+
+	ingredient_list += tmp_list
 
 	context = {
 		'is_auth':request.user.is_authenticated(),
@@ -68,7 +76,7 @@ def search_result(request):
 
 	# process selected_ingredient_list to calc result_id_list
 	result_id_list = getSortedRecipes(selected_ingredient_list)
-	
+
 	result_list = []
 	for i in range(len(result_id_list)):
 		print(result_id_list[i][0])
@@ -144,21 +152,23 @@ def add_recipe(request):
 		current_user = request.user
 
 		input_ingredients = request.POST['ingredientlist']
-		input_ingredient_list = input_ingredients.split('\\n')
+		input_ingredient_list = input_ingredients.split('\n')
 		input_directions = request.POST['direction']
-		input_direction_list = input_directions.split('\\n')
+		input_direction_list = input_directions.split('\n')
 
 		# create list of ingredient objects
 		ingredient_list = []
 		for i in range(len(input_ingredient_list)):
-			ingredient = Ingredient.objects.create(ingredient_name=input_ingredient_list[i])
-			ingredient_list.append(ingredient.pk)
+			if (input_ingredient_list[i] != ""):
+				ingredient = Ingredient.objects.create(ingredient_name=input_ingredient_list[i])
+				ingredient_list.append(ingredient.pk)
 
 		# create list of direction objects
 		direction_list = []
 		for i in range(len(input_direction_list)):
-			direction = Direction.objects.create(recipe_direction=input_direction_list[i])
-			direction_list.append(direction.pk)
+			if (input_direction_list[i] != ""):
+				direction = Direction.objects.create(recipe_direction=input_direction_list[i])
+				direction_list.append(direction.pk)
 
 		# add new recipe into DB
 		recipe = Recipe()
@@ -175,7 +185,7 @@ def add_recipe(request):
 		recipe.save()
 
 		# update inverted index list for searching
-		updateIndexList(input_ingredients)
+		updateIndexList(input_ingredient_list)
 		
 	return render(request, 'finderApp/add_recipe.html', {
 		'is_auth':request.user.is_authenticated(),
