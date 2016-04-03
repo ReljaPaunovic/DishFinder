@@ -8,6 +8,7 @@ from django.template import loader
 from django.template import RequestContext
 
 from django.contrib import auth
+from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
@@ -28,6 +29,10 @@ def signup(request):
 		form = UserCreationForm(request.POST)
 		if form.is_valid():
 			new_user = form.save()
+			new_user = authenticate(username=form.cleaned_data['username'],
+				                    password=form.cleaned_data['password1'],
+				                    )
+			login(request, new_user)
 			return HttpResponseRedirect("/finder/")
 	else:
 		form = UserCreationForm()
