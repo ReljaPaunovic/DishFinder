@@ -111,23 +111,25 @@ def recipe(request, recipe_id):
 			if int(recipe.pk) != int(recipe_id):
 				recipe_in_meal_list.append(recipe)
 
-	display_meal = True
-	if not recipe_in_meal_list:
-		display_meal = False
-
-	meal_suggestion = []
+	tmp_meal_suggestion = []
 	# initialize
 	for i in range(len(category_list)):
-		meal_suggestion.append({"cat_name":category_list[i]["name"], "recipes":[]})
-	if display_meal:
-		for recipe in recipe_in_meal_list:
-			meal_suggestion[recipe.category]["recipes"].append(recipe)
+		tmp_meal_suggestion.append({"cat_name":category_list[i]["name"],
+								"cat_html_id": category_list[i]["name"].replace(" ", ""),
+								"recipes":[]})
+
+	for recipe in recipe_in_meal_list:
+		tmp_meal_suggestion[recipe.category]["recipes"].append(recipe)
+
+	meal_suggestion = []
+	for i in range(len(tmp_meal_suggestion)):
+		if tmp_meal_suggestion[i]["recipes"]:
+			meal_suggestion.append(tmp_meal_suggestion[i])
 
 	return render(request, 'finderApp/recipe_detail.html', {
 		'is_auth':request.user.is_authenticated(),
 		'login_err': login_err,
 		'recipe': current_recipe,
-		'display_meal': display_meal,
 		'meal_suggestion': meal_suggestion,
 	})
 
