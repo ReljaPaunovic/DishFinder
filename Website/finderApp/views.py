@@ -106,12 +106,27 @@ def search_result(request):
 def recipe(request, recipe_id):
 	login_err = login_service(request)['err_msg']
 	current_recipe = get_object_or_404(Recipe, pk=recipe_id)
+	rate_error = ""
 
 	if request.method == 'POST':
 		user_rating = request.POST['rating']
 		current_user = request.user
 		if request.user.is_authenticated():
-			print()
+			user_rating = Rating.objects.all().filter(user__pk=current_user.id, recipe__pk=recipe_id)
+			if user_rating:
+				rate_error = "You already rated this recipe."
+			else:
+				rating = Rating.objects.create(score=user_rating, recipe=current_recipe, user=current_user)
+				# update recipe rating
+				rating_list = Rating.objects.all().filter(recipe__pk=recipe_id)
+				sum_score = 0
+				for individual_rating in rating_list:
+					sum_score += individual_rating.score
+				updated_score = sum_score / len(rating_list)
+				Recipe.objects.get(pk=recipe_id).update(score=updated_score)
+		else:
+			rate_error = "You need to log in first."
+			print(rate_error)
 
 
 	# retrieve list of recipe id which goes well with current recipe
@@ -144,6 +159,7 @@ def recipe(request, recipe_id):
 		'login_err': login_err,
 		'recipe': current_recipe,
 		'meal_suggestion': meal_suggestion,
+		'rate_error': rate_error,
 	})
 
 def add_recipe(request):
