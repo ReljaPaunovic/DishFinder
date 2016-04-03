@@ -16,10 +16,10 @@
         <p>
         {% for category in category_list %}
         <label class="radio-inline">
-        	{% if category.id == 2 %}
+        	{% if category.name == "Main Dish" %}
 	        	<input type="radio" name="category" checked="checked" value="{{ category.id }}">{{ category.name }}
         	{% else %}
-	        	<input type="radio" name="category" value="{{ category.name }}">{{ category.name }}
+	        	<input type="radio" name="category" value="{{ category.id }}">{{ category.name }}
         	{% endif %}
         </label>
         {% endfor %}

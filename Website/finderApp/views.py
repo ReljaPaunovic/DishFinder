@@ -11,6 +11,7 @@ from django.contrib import auth
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
+from .models import Category
 from .models import Ingredient
 from .models import Direction
 from .models import Recipe
@@ -95,15 +96,10 @@ def search_result(request):
 
 def recipe(request, recipe_id):
 	login_err = login_service(request)['err_msg']
-	category_list = [{"name":"Appetizer", "id":0}, 
-					 {"name":"Soup", "id":1}, 
-					 {"name":"Main Dish", "id":2}, 
-					 {"name":"Side Dish", "id":3}, 
-					 {"name":"Dessert", "id":4}, 
-					 {"name":"Salad", "id":5}]
-
 	current_recipe = get_object_or_404(Recipe, pk=recipe_id)
+
 	# retrieve list of recipe id which goes well with current recipe
+	category_list = Category.objects.all()
 	recipe_in_meal_list = []
 	meal_set = Meal.objects.all().filter(suggestion__pk=recipe_id)
 	for meal in meal_set:
@@ -114,13 +110,13 @@ def recipe(request, recipe_id):
 	tmp_meal_suggestion = []
 	# initialize
 	for i in range(len(category_list)):
-		tmp_meal_suggestion.append({"cat_name":category_list[i]["name"],
-								"cat_html_id": category_list[i]["name"].replace(" ", ""),
+		tmp_meal_suggestion.append({"cat_name":category_list[i].name,
+								"cat_html_id": category_list[i].name.replace(" ", ""),
 								"recipes":[]})
 
 	for recipe in recipe_in_meal_list:
-		if recipe not in tmp_meal_suggestion[recipe.category]["recipes"]:
-			tmp_meal_suggestion[recipe.category]["recipes"].append(recipe)
+		if recipe not in tmp_meal_suggestion[recipe.category.pk]["recipes"]:
+			tmp_meal_suggestion[recipe.category.pk]["recipes"].append(recipe)
 
 	meal_suggestion = []
 	for i in range(len(tmp_meal_suggestion)):
@@ -136,20 +132,16 @@ def recipe(request, recipe_id):
 
 def add_recipe(request):
 	login_err = login_service(request)['err_msg']
-	category_list = [{"name":"Appetizer", "id":0}, 
-					 {"name":"Soup", "id":1}, 
-					 {"name":"Main Dish", "id":2}, 
-					 {"name":"Side Dish", "id":3}, 
-					 {"name":"Dessert", "id":4}, 
-					 {"name":"Salad", "id":5}]
+	category_list = Category.objects.all()
 
 	if request.method == 'POST':
 		recipe_name = request.POST['dish_name']
-		category = request.POST['category']
+		category_id = request.POST['category']
+		category = category_list[int(category_id) - 1]
 		serving_num = request.POST['serve_num']
 		image_url = ""
 		current_user = request.user
-
+		
 		input_ingredients = request.POST['ingredientlist']
 		input_ingredient_list = input_ingredients.split('\\n')
 		input_directions = request.POST['direction']
