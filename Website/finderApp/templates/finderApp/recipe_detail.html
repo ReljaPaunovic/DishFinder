@@ -53,14 +53,18 @@
 
       <div class="tab-content">
         {% for meal in meal_suggestion %}
-          <div id="{{ meal.cat_html_id }}" class="tab-pane fade in active suggest_meal_wrapper">
-            {% for suggested_recipe in meal.recipes %}
-            <div class="mybox">
-              <img src="{{ suggested_recipe.image }}" class="img-rounded" alt="foodpic" width="200" height="150">
-              <p>{{ suggested_recipe.name }}</p>
+          {% if forloop.counter0 == 0 %}
+            <div id="{{ meal.cat_html_id }}" class="tab-pane fade in active suggest_meal_wrapper">
+          {% else %}
+            <div id="{{ meal.cat_html_id }}" class="tab-pane fade suggest_meal_wrapper">
+          {% endif %}
+              {% for suggested_recipe in meal.recipes %}
+              <div class="mybox">
+                <img src="{{ suggested_recipe.image }}" class="img-rounded" alt="foodpic" width="200" height="150">
+                <p>{{ suggested_recipe.name }}</p>
+              </div>
+              {% endfor %}
             </div>
-            {% endfor %}
-          </div>
         {% endfor %}
       </div>
     </div>  
