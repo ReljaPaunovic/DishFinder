@@ -68,9 +68,10 @@ def search_result(request):
 
 	# process selected_ingredient_list to calc result_id_list
 	result_id_list = getSortedRecipes(selected_ingredient_list)
-
+	
 	result_list = []
 	for i in range(len(result_id_list)):
+		print(result_id_list[i][0])
 		obj = Recipe.objects.get(pk=result_id_list[i][0])
 		obj.index = result_id_list[i][0]
 		result_list.append(obj)

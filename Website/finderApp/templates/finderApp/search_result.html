@@ -32,7 +32,7 @@
         <br><br>
         <div class="row" id="popularpanelgroup">
 	   			<div class="panel-group">
-
+{% if recipes %}
 	{% for recipe in recipes %}
 		<!-- display a preview info on each recipe, click to direct to recipe_detail page -->
 		<div class="panel">
@@ -45,7 +45,7 @@
 			</div>
 
 			<div class="panel-footer">
-				<pre id="keyword_preview">Keywords:   serve {{ recipe.servings }} person</pre>
+				<pre id="keyword_preview">Keywords:   serves {{ recipe.servings }} person</pre>
 			</div>
 		</div>
 	{% endfor %}
@@ -65,7 +65,15 @@
         {% endif %}
     </span>
   </div>
-
+{% else %}
+  <div class="panel error_panel">
+    <div class="table_wrapper">
+      <div class="table_cell_wrapper">
+        <p>No Results Found :(</p>
+      </div>
+    </div>
+  </div>
+{% endif %}
      			</div>
   		</div>
   	</div>
