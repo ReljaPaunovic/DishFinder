@@ -115,8 +115,8 @@ def recipe(request, recipe_id):
 								"recipes":[]})
 
 	for recipe in recipe_in_meal_list:
-		if recipe not in tmp_meal_suggestion[recipe.category.pk]["recipes"]:
-			tmp_meal_suggestion[recipe.category.pk]["recipes"].append(recipe)
+		if recipe not in tmp_meal_suggestion[recipe.category.pk - 1]["recipes"]:
+			tmp_meal_suggestion[recipe.category.pk - 1]["recipes"].append(recipe)
 
 	meal_suggestion = []
 	for i in range(len(tmp_meal_suggestion)):
