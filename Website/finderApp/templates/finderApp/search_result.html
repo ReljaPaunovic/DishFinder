@@ -5,23 +5,23 @@
 {% load template_tags %}
 
 <script type="text/javascript">
-  function ranking(method) {
-    var hidden_input = $(document.createElement("input"));
-    hidden_input.attr("type", "hidden");
-    hidden_input.attr("name", "ranking_method");
-    if (method == "popular")
-      hidden_input.attr("value", "popular_ranking");
-    else if (method == "percentage")
-      hidden_input.attr("value", "percentage_ranking");
+  // function ranking(method) {
+  //   var hidden_input = $(document.createElement("input"));
+  //   hidden_input.attr("type", "hidden");
+  //   hidden_input.attr("name", "ranking_method");
+  //   if (method == "popular")
+  //     hidden_input.attr("value", "popular_ranking");
+  //   else if (method == "percentage")
+  //     hidden_input.attr("value", "percentage_ranking");
 
-    var ingredient_list_input = $(document.createElement("input"));
-    ingredient_list_input.attr("type", "hidden");
-    ingredient_list_input.attr("name", "ingredient_list");
-    ingredient_list_input.attr("value", JSON.stringify({{ query_ingredients }}));
-    $("#popular_ranking_form").append(hidden_input);
-    $("#popular_ranking_form").append(ingredient_list_input);
-    $("#popular_ranking_form").submit();
-  }
+  //   var ingredient_list_input = $(document.createElement("input"));
+  //   ingredient_list_input.attr("type", "hidden");
+  //   ingredient_list_input.attr("name", "ingredient_list");
+  //   ingredient_list_input.attr("value", JSON.stringify({{ query_ingredients }}));
+  //   $("#popular_ranking_form").append(hidden_input);
+  //   $("#popular_ranking_form").append(ingredient_list_input);
+  //   $("#popular_ranking_form").submit();
+  // }
 </script>
 
 <div class="container-fluid" id="listbg">
@@ -32,7 +32,7 @@
     
     <div class="col-lg-6" id="myselecttab">
       <ul class="nav nav-pills nav-justified">
-        <form id="popular_ranking_form" method="get">
+        <!-- <form id="popular_ranking_form" method="get">
           <li class="active"  onclick="ranking('popular')">
             <a data-toggle="pill" href="#populartab">
               <span class="glyphicon glyphicon-heart"></span>  Popular
@@ -43,14 +43,24 @@
             <span class="glyphicon glyphicon-grain"></span>  Healthy
             </a>
           </li>
-        </form>
+        </form> -->
+        <li>
+           <a data-toggle="pill" href="#populartab">
+             <span class="glyphicon glyphicon-heart"></span>  Popular
+           </a>
+         </li>
+         <li class="active">
+           <a data-toggle="pill" href="#recommendtab">
+           <span class="glyphicon glyphicon-grain"></span>  Recommend
+           </a>
+         </li>
       </ul>
     </div>  
   </div>
 
   <div class="tab-content">
     <!--Content of the First Tab-->
-    <div id="populartab" class="tab-pane fade in active container">
+    <div id="recommendtab" class="tab-pane fade in active container">
         <br><br>
         <div class="row" id="popularpanelgroup">
 	   			<div class="panel-group">

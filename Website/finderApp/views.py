@@ -76,12 +76,12 @@ def search_result(request):
 	login_err = login_service(request)['err_msg']
 	template = loader.get_template('finderApp/search_result.html')
 
-	selected_ingredient_list = []
+	# selected_ingredient_list = []
 	if request.method == "GET":
 		if 'ingredient_list' in request.GET:
 			selected_ingredient_list_string = request.GET['ingredient_list']
 			# json decode
-			print(selected_ingredient_list_string)
+			# print(selected_ingredient_list_string)
 			selected_ingredient_list = json.loads(selected_ingredient_list_string)
 	
 	# process selected_ingredient_list to calc result_id_list
@@ -93,10 +93,10 @@ def search_result(request):
 		obj.index = result_id_list[i][0]
 		result_list.append(obj)
 
-	if request.method == "GET":
-		if "ranking_method" in request.GET:
-			if request.GET["ranking_method"] == "popular_ranking":
-				result_list = sorted(result_list, key=lambda recipe: recipe.avg_rating)
+	# if request.method == "GET":
+	# 	if "ranking_method" in request.GET:
+	# 		if request.GET["ranking_method"] == "popular_ranking":
+	# 			result_list = sorted(result_list, key=lambda recipe: recipe.avg_rating)
 
 	# Show 10 recipe per page
 	paginator = Paginator(result_list, 10)
@@ -113,7 +113,7 @@ def search_result(request):
 	context = {
 		'is_auth':request.user.is_authenticated(),
 		'login_err': login_err,
-		'query_ingredients': selected_ingredient_list,
+		# 'query_ingredients': selected_ingredient_list,
 		'recipes': recipes,
 	}
 	return HttpResponse(template.render(context, request))
