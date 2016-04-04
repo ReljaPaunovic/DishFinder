@@ -4,6 +4,26 @@
 
 {% load template_tags %}
 
+<script type="text/javascript">
+  function ranking(method) {
+    var hidden_input = $(document.createElement("input"));
+    hidden_input.attr("type", "hidden");
+    hidden_input.attr("name", "ranking_method");
+    if (method == "popular")
+      hidden_input.attr("value", "popular_ranking");
+    else if (method == "percentage")
+      hidden_input.attr("value", "percentage_ranking");
+
+    var ingredient_list_input = $(document.createElement("input"));
+    ingredient_list_input.attr("type", "hidden");
+    ingredient_list_input.attr("name", "ingredient_list");
+    ingredient_list_input.attr("value", JSON.stringify({{ query_ingredients }}));
+    $("#popular_ranking_form").append(hidden_input);
+    $("#popular_ranking_form").append(ingredient_list_input);
+    $("#popular_ranking_form").submit();
+  }
+</script>
+
 <div class="container-fluid" id="listbg">
   <div class="row">
     
@@ -12,16 +32,18 @@
     
     <div class="col-lg-6" id="myselecttab">
       <ul class="nav nav-pills nav-justified">
-        <li class="active">
-          <a data-toggle="pill" href="#populartab">
-            <span class="glyphicon glyphicon-heart"></span>  Popular
-          </a>
-        </li>
-        <li>
-          <a data-toggle="pill" href="#healthytab">
-          <span class="glyphicon glyphicon-grain"></span>  Healthy
-          </a>
-        </li>
+        <form id="popular_ranking_form" method="get">
+          <li class="active"  onclick="ranking('popular')">
+            <a data-toggle="pill" href="#populartab">
+              <span class="glyphicon glyphicon-heart"></span>  Popular
+            </a>
+          </li>
+          <li onclick="ranking('percentage')">
+            <a data-toggle="pill" href="#healthytab">
+            <span class="glyphicon glyphicon-grain"></span>  Healthy
+            </a>
+          </li>
+        </form>
       </ul>
     </div>  
   </div>
