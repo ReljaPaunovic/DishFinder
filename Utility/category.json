@@ -1,0 +1,44 @@
+ [
+   {
+      "model": "finderApp.Category",
+      "pk": 1,
+      "fields": {
+         "name": "Appetizer"
+      }
+   },
+   {
+      "model": "finderApp.Category",
+      "pk": 2,
+      "fields": {
+         "name": "Soup"
+      }
+   },
+   {
+      "model": "finderApp.Category",
+      "pk": 3,
+      "fields": {
+         "name": "Main Dish"
+      }
+   },
+   {
+      "model": "finderApp.Category",
+      "pk": 4,
+      "fields": {
+         "name": "Side Dish"
+      }
+   },
+   {
+      "model": "finderApp.Category",
+      "pk": 5,
+      "fields": {
+         "name": "Dessert"
+      }
+   },
+   {
+      "model": "finderApp.Category",
+      "pk": 6,
+      "fields": {
+         "name": "Salad"
+      }
+   },
+]
